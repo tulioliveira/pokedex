@@ -1,0 +1,148 @@
+<% include ./partials/header %>
+<% 
+function romanize (num) {
+	if (!+num)
+		return false;
+	var digits = String(+num).split(""),
+	key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+	"","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+	"","I","II","III","IV","V","VI","VII","VIII","IX"],
+	roman = "",
+	i = 3;
+	while (i--)
+		roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+	return Array(+digits.join("") + 1).join("M") + roman;
+}
+%>
+	
+	<% if ((typeof pokemon != 'undefined') && (typeof pokemonAbilities != 'undefined') && (typeof pokemonMoves != 'undefined')) { %>
+	</div>
+	<div class="ui tall stacked justified container segment margin-top-lg">
+		<div class="ui huge header"> 
+			<img src="/images/sprites/<%= (pokemon.id >650) ? 0 : pokemon.id %>.png" class="ui image"> 
+			 <%= (pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)).split("-")[0] %>
+			<div class="ui <%= pokemon.type1Color %> label">
+				 <%= (pokemon.tipo1.charAt(0).toUpperCase() + pokemon.tipo1.slice(1)).split("-")[0] %>
+			</div>
+			<% if (pokemon.tipo2) { %>
+				<div class="ui <%= pokemon.type2Color %> label">
+					<%= (pokemon.tipo2.charAt(0).toUpperCase() + pokemon.tipo2.slice(1)).split("-")[0] %>
+				</div> 
+			<% } %>
+		</div>
+		<div class="ui eight center aligned statistics">
+			<div class="statistic">
+				<div class="label">
+					Id
+				</div>
+				<div class="value">
+					<%= pokemon.id %>
+				</div>
+			</div>
+			<div class="statistic">
+				<div class="label">
+					Base Xp
+				</div>
+				<div class="value">
+					<%= pokemon.baseXP %>
+				</div>
+			</div>
+			<div class="statistic">
+				<div class="label">
+					Height
+				</div>
+				<div class="value">
+					<%= pokemon.height/10 %>m
+				</div>
+			</div>
+			<div class="statistic">
+				<div class="label">
+					Weight
+				</div>
+				<div class="value">
+					<%= pokemon.weight/10 %>kg
+				</div>
+			</div>
+			<div class="statistic">
+				<div class="label">
+					Generation
+				</div>
+				<div class="value">
+					<%= romanize(pokemon.generation) %>
+				</div>
+			</div>
+			<div class="statistic">
+				<div class="label">
+					Game
+				</div>
+				<div class="text value">
+					<%- pokemon.jogo.replace(" and ","<br>") %>
+				</div>
+			</div>
+			<div class="statistic">
+				<div class="label">
+					Region
+				</div>
+				<div class="text value">
+					<%= pokemon.regiao %>
+				</div>
+			</div>
+		</div>
+		<div class="ui raised segment">
+			<div class="ui header">Abilities</div>
+			<div class="ui divided list">
+				<% pokemonAbilities.forEach(function(ability) { %>
+				
+					<div class="item">
+						<div class="content">
+							<div class="header"><%= (ability.name.charAt(0).toUpperCase() + ability.name.slice(1)).split("-")[0] %></div>
+							<%= ability.description %>
+						</div>
+					</div>				
+				<% }); %>
+			</div>
+		</div>
+		<table class="ui compact center aligned definition table">
+			<thead>
+				<tr><th></th>
+					<th>Type</th>
+					<th>Class</th>
+					<th>Power</th>
+					<th>Accuracy</th>
+					<th>PP</th>
+					<th>Ailment</th>
+					<th>Description</th>
+					<th>Level</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% pokemonMoves.forEach(function (move) { %>
+					<tr>
+						<td> <%= (move.name.charAt(0).toUpperCase() + move.name.slice(1)).replace("-", " ") %></td>
+						<td><div class="ui label <%= move.typeColor %>"><%= (move.tipo.charAt(0).toUpperCase() + move.tipo.slice(1)).split("-")[0] %></div></td>
+						<td><%= (move.class.charAt(0).toUpperCase() + move.class.slice(1)).split("-")[0] %></td>
+						<td><%= move.power %></td>
+						<td><%= move.accuracy %></td>
+						<td><%= move.pp %></td>
+						<td><%= (move.class.charAt(0).toUpperCase() + move.class.slice(1)).split("-")[0] %></td>
+						<td class="left aligned"><%= move.description %></td>
+						<td><%= (move.level == 0) ? "-" : move.level %></td>
+					</tr>
+				<% }); %>
+			</tbody>
+		</table>
+	</div>
+
+	<% } else { %>
+	<div class="ui text container">
+		<h1 class="ui inverted header">
+			ERROR 404!
+		</h1>
+		<h2>Sorry, that pokémon doesn't exist! Please search again!</h2>
+		<a href="/pokemon/" class="ui huge button red">Back to the list <i class="right arrow icon"></i></a>
+	</div>
+
+	</div>
+	<% } %>
+	
+<% include ./partials/footer %>

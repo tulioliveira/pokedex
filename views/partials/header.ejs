@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pokedex</title>
+		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="/assets/semantic-ui/semantic.min.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+
+	</head>
+	<body>
+	<div class="ui inverted vertical masthead center aligned segment" <%= (currentUrl == "home" || currentUrl == "error") ? "style=height:100%" : "" %>>
+
+		<div class="page-header">
+			<form class="ui form" action="/pokemon/">
+				<div class="ui container">
+					<div class="ui secondary pointing menu inverted">	
+						<a href="/" class="item <%= (currentUrl == "home") ? "active" : "" %>"> Home </a>
+						<a href="/pokemon/" class="item <%= (currentUrl == "pokemon" || currentUrl == "error") ? "active" : "" %>"> Pokémon List </a>
+						<div class="right item">
+							<div class="ui right action input inverted">
+								<input name="q" value="<%= query.q %>" type="text" placeholder="Search for pokémon...">
+								<button type="submit" class="ui button basic inverted red">Go!</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>

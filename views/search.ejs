@@ -1,0 +1,48 @@
+<% include ./partials/header %>
+
+	<div class="ui container">
+		<div class="margin-bottom-lg">
+			<h1 class="ui inverted header">
+				Pokémon List
+			</h1>
+			<% if(typeof query.q != "undefined") {%>
+				<h2>Results for "<%= query.q %>"</h2>
+			<% } else { %>
+				<h2>Try querying for a pokémon!</h2>
+			<% } %>
+			
+			<form class="ui form" action="/pokemon">
+				<div class="ui form huge inverted">
+					<div class="ui field">
+						<div class="ui right action input">
+							<input name="q" type="text" value="<%= query.q %>" placeholder="Search for pokémon...">
+							<button class="ui red large right labeled icon button" type="submit">
+								<i class="search icon"></i>
+								Search
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div></div>
+
+	<% if(pokemons.length) { %>
+	
+	<div class="ui container segment piled search-results">
+		<div class="ui left aligned grid">
+			<% pokemons.forEach(function(pokemon){ %>
+				<div class="four wide column">
+					<div class="ui left labeled button fluid" tabindex="0">
+						<a href="/pokemon/<%= pokemon.id %>" class="ui <%= pokemon.color %> right label">
+							<%= pokemon.id %>
+						</a>
+						<a href="/pokemon/<%= pokemon.id %>" class="ui large button fluid <%= pokemon.color %>">  <%= (pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)).split("-")[0] %> </a>
+					</div>
+				</div>
+			<% }) %>
+		</div>
+	</div>
+	<% } %>
+
+<% include ./partials/footer %>

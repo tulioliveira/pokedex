@@ -1,0 +1,27 @@
+version: '2'
+services:
+    app:
+        build: .
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules
+        ports:
+            - "8080:8080"
+        links:
+            - db:mysql
+        environment:
+            - DATABASE_HOST=db
+    db:
+        image: mysql/mysql-server
+        container_name: db
+        ports:
+            - "3306:3306"
+        volumes:
+            - "sql-data:/var/lib/mysql"
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=pokedex
+            - MYSQL_USER=tulio
+            - MYSQL_PASSWORD=123456
+volumes:
+    sql-data:

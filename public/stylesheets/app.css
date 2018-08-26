@@ -1,0 +1,87 @@
+body, html{
+	height: 100%;
+	padding:0!important; 
+	margin:0 !important;
+	min-width: 750px;
+}
+
+.icon-button{
+	background: none;
+	padding: 0px;
+	border: none;    
+}
+
+.margin-bottom-lg {
+	margin-bottom: 60px;
+}
+
+.margin-top-lg {
+	margin-top: 60px !important;
+}
+
+.hidden.menu {
+	display: none;
+}
+
+.masthead {
+	box-shadow: 0 10px 8px 3px gray !important;
+}
+
+.masthead.segment {
+	padding: 1em 0em;
+}
+.masthead .logo.item img {
+	margin-right: 1em;
+}
+.masthead .ui.menu .ui.button {
+	margin-left: 0.5em;
+}
+.masthead h1.ui.header {
+	margin-top: 3em;
+	margin-bottom: 0em;
+	font-size: 4em;
+	font-weight: normal;
+}
+.masthead h2 {
+	font-size: 1.7em;
+	font-weight: normal;
+}
+
+.search-results h1.ui.header {
+	margin-top: 0em;
+	margin-bottom: 1em;
+	font-size: 4em;
+	font-weight: normal;
+}
+
+.footer.segment {
+	padding: 5em 0em;
+}
+
+.secondary.pointing.menu .toc.item {
+	display: none;
+}
+
+@media only screen and (max-width: 700px) {
+	.ui.fixed.menu {
+		display: none !important;
+	}
+	.secondary.pointing.menu .item,
+	.secondary.pointing.menu .menu {
+		display: none;
+	}
+	.secondary.pointing.menu .toc.item {
+		display: block;
+	}
+	.masthead.segment {
+		min-height: 350px;
+	}
+	.masthead h1.ui.header {
+		font-size: 2em;
+		margin-top: 1.5em;
+	}
+	.masthead h2 {
+		margin-top: 0.5em;
+		font-size: 1.5em;
+	}
+}
